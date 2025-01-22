@@ -19,4 +19,47 @@ describe("Add/Remove Elements Page Tests", () => {
     // Verify that a Delete button appears
     cy.get(".added-manually").should("be.visible").and("have.length", 1);
   });
+  // Click the "Add Element" button multiple times
+  it("it should add multiple delete buttons on each click", () => {
+    const multipleClicks = 3;
+    for (let i = 0; i < multipleClicks; i++) {
+      cy.get('[onclick="addElement()"]').click();
+    }
+    // Verify that the correct number of Delete buttons are added
+    cy.get(".added-manually").should("have.length", multipleClicks);
+  });
+  it("should remove a Delete button when clicked", () => {
+    // Add a Delete button
+    cy.get("button").contains("Add Element").click();
+
+    // Verify the Delete button is visible
+    cy.get(".added-manually").should("be.visible");
+
+    // Click the Delete button
+    cy.get(".added-manually").click();
+
+    // Verify the Delete button is removed
+    cy.get(".added-manually").should("not.exist");
+  });
+
+      //Verify Adding and Removing Multiple Buttons
+  it('should add and remove multiple Delete buttons correctly', () => {
+    const numberOfClicks = 5;
+
+    // Add multiple Delete buttons
+    for (let i = 0; i < numberOfClicks; i++) {
+      cy.get('button').contains('Add Element').click();
+    }
+
+    // Verify the correct number of Delete buttons
+    cy.get('.added-manually').should('have.length', numberOfClicks);
+
+    // Remove all Delete buttons one by one
+    cy.get('.added-manually').each(($btn) => {
+      cy.wrap($btn).click();
+    });
+
+    // Verify all Delete buttons are removed
+    cy.get('.added-manually').should('not.exist');
+  });
 });
