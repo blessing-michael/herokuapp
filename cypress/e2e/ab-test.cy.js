@@ -10,6 +10,12 @@ it("verify page title", () => {
     cy.title().should("eq", "The Internet");
   });
   
+  it('it should have correct page header', ()=>{
+    cy.get('h3').should('contain.text', 'A/B Test Control')
+})
+  it('it should ensure paragraph contains text', ()=>{
+    cy.get('p').should('not.be.empty')
+  })
 
 });
 
