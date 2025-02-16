@@ -1,6 +1,12 @@
 /// <reference types = "cypress" />
 describe("Test case for challenging dom page", () => {
   const baseUrl = "https://the-internet.herokuapp.com/challenging_dom";
+  const possibleTexts = [
+    'bar',
+    'baz',
+    'qux',
+    'foo'
+  ];
   beforeEach(() => {
     cy.visit(baseUrl);
   });
@@ -19,5 +25,21 @@ describe("Test case for challenging dom page", () => {
 
     // Verify that a row contains a specific text
     cy.get('table tr').contains('1').should('exist');
+  });
+
+  it('clicks all the buttons serially', function () {
+   
+    
+   
+    cy.get('.button').each(($btn, index) => {
+      // For each button, log the text and click it
+      cy.wrap($btn)
+      .should('be.visible')
+      
+      
+      
+    });
+      
+  
   });
 });
